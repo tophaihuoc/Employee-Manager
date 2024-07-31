@@ -1,6 +1,7 @@
 #include "include/nhanvien.h"
 #include <iostream>
 #include <iomanip>
+#include <limits>
 
 using namespace std;
 
@@ -109,21 +110,19 @@ void NhanVien::setSoNgayNghi(int soNgayNghi)
     this->soNgayNghi = soNgayNghi;
 }
 
-// Phuong thuc nhap nhan vien
+// Nhập thông tin nhân viên
 void NhanVien::NhapNhanVien()
 {
-    cout << "Nhap ma nhan vien: ";
-    cin >> maNhanVien;
-    cin.ignore();
-
-    // Kiem tra truong nhap ho ten nhan vien
-    cout << "Nhap ten nhan vien: ";
     while (true)
     {
-        getline(cin, hoTen);
-        if (hoTen.empty())
+        cout << "Nhap ma nhan vien (6 chu so): ";
+        cin >> maNhanVien;
+
+        if (cin.fail() || maNhanVien < 100000 || maNhanVien > 999999)
         {
-            cout << "===> Ho ten nhan vien khong duoc de trong! Moi ban nhap lai: ";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "==> Ma nhan vien khong hop le! Vui long nhap lai." << endl;
         }
         else
         {
@@ -131,18 +130,47 @@ void NhanVien::NhapNhanVien()
         }
     }
 
-    cout << "Nhap tuoi nhan vien: ";
-    cin >> tuoi;
-    cin.ignore();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    // Kiem tra truong nhap gioi tinh nhan vien
-    cout << "Nhap gioi tinh nhan vien (Nam/Nu): ";
     while (true)
     {
+        cout << "Nhap ho ten nhan vien: ";
+        getline(cin, hoTen);
+        if (hoTen.empty())
+        {
+            cout << "==> Ho ten nhan vien khong duoc de trong! Vui long nhap lai." << endl;
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    while (true)
+    {
+        cout << "Nhap tuoi nhan vien (tu 18 den 35 tuoi): ";
+        cin >> tuoi;
+        if (cin.fail() || tuoi < 18 || tuoi > 35)
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "==> Tuoi nhan vien khong hop le! Vui long nhap lai." << endl;
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    while (true)
+    {
+        cout << "Nhap gioi tinh nhan vien (Nam/Nu): ";
         getline(cin, gioiTinh);
         if (gioiTinh.empty())
         {
-            cout << "===> Gioi tinh khong duoc de trong! Moi ban nhap lai: ";
+            cout << "==> Gioi tinh nhan vien khong duoc de trong! Vui long nhap lai." << endl;
         }
         else if (gioiTinh == "Nam" || gioiTinh == "Nu")
         {
@@ -150,18 +178,17 @@ void NhanVien::NhapNhanVien()
         }
         else
         {
-            cout << "===> Gioi tinh phai la 'Nam' hoac 'Nu'! Moi ban nhap lai: ";
+            cout << "==> Gioi tinh nhan vien phai la 'Nam' hoac 'Nu'! Vui long nhap lai." << endl;
         }
     }
 
-    // Kiem tra truong nhap dia chi nhan vien
-    cout << "Nhap dia chi nhan vien: ";
     while (true)
     {
+        cout << "Nhap dia chi nhan vien: ";
         getline(cin, diaChi);
         if (diaChi.empty())
         {
-            cout << "===> Dia chi khong duoc de trong! Moi ban nhap lai: ";
+            cout << "==> Dia chi nhan vien khong duoc de trong! Vui long nhap lai." << endl;
         }
         else
         {
@@ -169,22 +196,21 @@ void NhanVien::NhapNhanVien()
         }
     }
 
-    // Kiem tra truong nhap so dien thoai nhan vien
-    cout << "Nhap so dien thoai nhan vien: ";
     while (true)
     {
+        cout << "Nhap so dien thoai nhan vien (10 chu so): ";
         getline(cin, soDienThoai);
         if (soDienThoai.empty())
         {
-            cout << "===> So dien thoai khong duoc de trong! Moi ban nhap lai: ";
+            cout << "==> So dien thoai nhan vien khong duoc de trong! Vui long nhap lai." << endl;
         }
         else if (soDienThoai.length() != 10)
         {
-            cout << "===> So dien thoai phai co 10 chu so! Moi ban nhap lai: ";
+            cout << "==> So dien thoai phai co 10 chu so! Vui long nhap lai." << endl;
         }
         else if (soDienThoai.find_first_not_of("0123456789") != string::npos)
         {
-            cout << "===> So dien thoai phai la con so! Moi ban nhap lai: ";
+            cout << "==> So dien thoai phai la chu so! Vui long nhap lai." << endl;
         }
         else
         {
@@ -192,20 +218,56 @@ void NhanVien::NhapNhanVien()
         }
     }
 
-    cout << "Nhap luong co ban moi ngay: ";
-    cin >> luong;
-    cin.ignore();
+    while (true)
+    {
+        cout << "Nhap luong co ban moi ngay cua nhan vien (tu 100000 den 500000): ";
+        cin >> luong;
+        if (cin.fail() || luong < 100000 || luong > 500000)
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "==> Luong co ban moi ngay khong hop le! Vui long nhap lai." << endl;
+        }
+        else
+        {
+            break;
+        }
+    }
 
-    cout << "Nhap so ngay lam viec trong thang: ";
-    cin >> soNgayLamViec;
-    cin.ignore();
+    while (true)
+    {
+        cout << "Nhap so ngay lam viec cua nhan vien (tu 1 den 31 ngay): ";
+        cin >> soNgayLamViec;
+        if (cin.fail() || soNgayLamViec < 1 || soNgayLamViec > 31)
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "==> So ngay lam viec khong hop le! Vui long nhap lai." << endl;
+        }
+        else
+        {
+            break;
+        }
+    }
 
-    cout << "Nhap so ngay nghi trong thang: ";
-    cin >> soNgayNghi;
-    cin.ignore();
+    while (true)
+    {
+        cout << "Nhap so ngay nghi cua nhan vien (tu 0 den 31 ngay): ";
+        cin >> soNgayNghi;
+        if (cin.fail() || soNgayNghi < 0 || soNgayNghi > 31)
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "==> So ngay nghi khong hop le! Vui long nhap lai." << endl;
+        }
+        else
+        {
+            break;
+        }
+    }
 }
 
-// Phuong thuc hien thi nhan vien
+// Phương thức hiển thị nhân viên
 void NhanVien::HienThiNhanVien()
 {
     cout << "Ma nhan vien: " << maNhanVien << endl;
@@ -220,21 +282,35 @@ void NhanVien::HienThiNhanVien()
     cout << "Tong luong thang: " << fixed << setprecision(2) << TinhLuongTheoNgay() << " VND" << endl;
 }
 
-// Phuong thuc cap nhap thong tin nhan vien
+// Phương thức cập nhật thông tin nhân viên
 void NhanVien::CapNhapThongTinNhanVien()
 {
-    cout << "Nhap ma nhan vien: ";
-    cin >> maNhanVien;
-    cin.ignore();
-
-    // Kiem tra truong nhap ho ten nhan vien
-    cout << "Nhap ten nhan vien: ";
     while (true)
     {
+        cout << "Nhap ma nhan vien (6 chu so): ";
+        cin >> maNhanVien;
+
+        if (cin.fail() || maNhanVien < 100000 || maNhanVien > 999999)
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "==> Ma nhan vien khong hop le! Vui long nhap lai." << endl;
+        }
+        else
+        { 
+            break;
+        }
+    }
+
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    while (true)
+    {
+        cout << "Nhap ho ten nhan vien: ";
         getline(cin, hoTen);
         if (hoTen.empty())
         {
-            cout << "===> Ho ten nhan vien khong duoc de trong! Moi ban nhap lai: ";
+            cout << "==> Ho ten nhan vien khong duoc de trong! Vui long nhap lai." << endl;
         }
         else
         {
@@ -242,18 +318,31 @@ void NhanVien::CapNhapThongTinNhanVien()
         }
     }
 
-    cout << "Nhap tuoi nhan vien: ";
-    cin >> tuoi;
-    cin.ignore();
-
-    // Kiem tra truong nhap gioi tinh nhan vien
-    cout << "Nhap gioi tinh nhan vien (Nam/Nu): ";
     while (true)
     {
+        cout << "Nhap tuoi nhan vien (tu 18 den 35 tuoi): ";
+        cin >> tuoi;
+        if (cin.fail() || tuoi < 18 || tuoi > 35)
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "==> Tuoi nhan vien khong hop le! Vui long nhap lai." << endl;
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    while (true)
+    {
+        cout << "Nhap gioi tinh nhan vien (Nam/Nu): ";
         getline(cin, gioiTinh);
         if (gioiTinh.empty())
         {
-            cout << "===> Gioi tinh khong duoc de trong! Moi ban nhap lai: ";
+            cout << "==> Gioi tinh nhan vien khong duoc de trong! Vui long nhap lai." << endl;
         }
         else if (gioiTinh == "Nam" || gioiTinh == "Nu")
         {
@@ -261,18 +350,17 @@ void NhanVien::CapNhapThongTinNhanVien()
         }
         else
         {
-            cout << "===> Gioi tinh phai la 'Nam' hoac 'Nu'! Moi ban nhap lai: ";
+            cout << "==> Gioi tinh nhan vien phai la 'Nam' hoac 'Nu'! Vui long nhap lai." << endl;
         }
     }
 
-    // Kiem tra truong nhap dia chi nhan vien
-    cout << "Nhap dia chi nhan vien: ";
     while (true)
     {
+        cout << "Nhap dia chi nhan vien: ";
         getline(cin, diaChi);
         if (diaChi.empty())
         {
-            cout << "===> Dia chi khong duoc de trong! Moi ban nhap lai: ";
+            cout << "==> Dia chi nhan vien khong duoc de trong! Vui long nhap lai." << endl;
         }
         else
         {
@@ -280,22 +368,21 @@ void NhanVien::CapNhapThongTinNhanVien()
         }
     }
 
-    // Kiem tra truong nhap so dien thoai nhan vien
-    cout << "Nhap so dien thoai nhan vien: ";
     while (true)
     {
+        cout << "Nhap so dien thoai nhan vien (10 chu so): ";
         getline(cin, soDienThoai);
         if (soDienThoai.empty())
         {
-            cout << "===> So dien thoai khong duoc de trong! Moi ban nhap lai: ";
+            cout << "==> So dien thoai nhan vien khong duoc de trong! Vui long nhap lai." << endl;
         }
         else if (soDienThoai.length() != 10)
         {
-            cout << "===> So dien thoai phai co 10 chu so! Moi ban nhap lai: ";
+            cout << "==> So dien thoai phai co 10 chu so! Vui long nhap lai." << endl;
         }
         else if (soDienThoai.find_first_not_of("0123456789") != string::npos)
         {
-            cout << "===> So dien thoai phai la con so! Moi ban nhap lai: ";
+            cout << "==> So dien thoai phai la chu so! Vui long nhap lai." << endl;
         }
         else
         {
@@ -303,20 +390,56 @@ void NhanVien::CapNhapThongTinNhanVien()
         }
     }
 
-    cout << "Nhap luong co ban moi ngay: ";
-    cin >> luong;
-    cin.ignore();
+    while (true)
+    {
+        cout << "Nhap luong co ban moi ngay cua nhan vien (tu 100000 den 500000): ";
+        cin >> luong;
+        if (cin.fail() || luong < 100000 || luong > 500000)
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "==> Luong co ban moi ngay khong hop le! Vui long nhap lai." << endl;
+        }
+        else
+        {
+            break;
+        }
+    }
 
-    cout << "Nhap so ngay lam viec trong thang: ";
-    cin >> soNgayLamViec;
-    cin.ignore();
+    while (true)
+    {
+        cout << "Nhap so ngay lam viec cua nhan vien (tu 1 den 31 ngay): ";
+        cin >> soNgayLamViec;
+        if (cin.fail() || soNgayLamViec < 1 || soNgayLamViec > 31)
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "==> So ngay lam viec khong hop le! Vui long nhap lai." << endl;
+        }
+        else
+        {
+            break;
+        }
+    }
 
-    cout << "Nhap so ngay nghi trong thang: ";
-    cin >> soNgayNghi;
-    cin.ignore();
+    while (true)
+    {
+        cout << "Nhap so ngay nghi cua nhan vien (tu 0 den 31 ngay): ";
+        cin >> soNgayNghi;
+        if (cin.fail() || soNgayNghi < 0 || soNgayNghi > 31)
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "==> So ngay nghi khong hop le! Vui long nhap lai." << endl;
+        }
+        else
+        {
+            break;
+        }
+    }
 }
 
-// Phuong thuc xoa nhan vien
+// Phương thức xóa nhân viên
 void NhanVien::XoaNhanVien()
 {
     maNhanVien = 0;
@@ -330,7 +453,7 @@ void NhanVien::XoaNhanVien()
     soNgayNghi = 0;
 }
 
-// Phuong thuc tim kiem nhan vien
+// Phương thức tìm kiếm nhân viên
 void NhanVien::TimNhanVien()
 {
     cout << "Nhap ma nhan vien can tim kiem: ";
@@ -349,31 +472,31 @@ void NhanVien::TimNhanVien()
     }
 }
 
-// Phuong thuc cap nhat so ngay lam viec
+// Phương thức cập nhật số ngày làm việc
 void NhanVien::CapNhatNgayLamViec(int soNgayLamViec)
 {
     this->soNgayLamViec = soNgayLamViec;
 }
 
-// Phuong thuc cap nhat so ngay nghi
+// Phương thức cập nhật số ngày nghỉ
 void NhanVien::CapNhatNgayNghi(int soNgayNghi)
 {
     this->soNgayNghi = soNgayNghi;
 }
 
-// Phuong thuc them luong
+// Phương thức thêm lương
 void NhanVien::ThemLuong(double soTienThem)
 {
     luong += soTienThem;
 }
 
-// Phuong thuc tru luong
+// Phương thức trừ lương
 void NhanVien::TruLuong(double soTienTru)
 {
     luong -= soTienTru;
 }
 
-// Phuong thuc tinh luong theo ngay
+// Phương thức tính lương theo ngày
 double NhanVien::TinhLuongTheoNgay()
 {
     return luong * soNgayLamViec;
