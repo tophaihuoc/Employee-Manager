@@ -4,7 +4,7 @@
 using namespace std;
 
 void menu() {
-    cout << "||========= Chuong trinh quan ly luong nhan vien ===============||" << endl;
+    cout << "||========= Chuong trinh quan ly luong nhan vien =================||" << endl;
     cout << "|| 1. Them nhan vien                                              ||" << endl;
     cout << "|| 2. Hien thi danh sach                                          ||" << endl;
     cout << "|| 3. Cap nhat thong tin                                          ||" << endl;
