@@ -1,4 +1,8 @@
 #include "include/nhanvien.h"
+#include <iostream>
+#include <string>
+
+using namespace std;
 
 NhanVien::NhanVien(int maNhanVien, string tenNhanVien, int tuoi, string gioiTinh, string diaChi, string soDienThoai, double luong) {
     this->maNhanVien = maNhanVien;
@@ -71,29 +75,73 @@ void NhanVien::setLuong(double luongNV) {
     luong = luongNV;
 }
 
-// Ham nhap nhan vien nhan vien
+// Phuong thuc nhap nhan vien
 void NhanVien::NhapNhanVien() {
     cout << "Nhap ma nhan vien: ";
     cin >> maNhanVien;
+    cin.ignore(); 
+
+    // Code kiem tra xem truong nhap tenNhanVien 
     cout << "Nhap ten nhan vien: ";
-    cin.ignore();
-    getline(cin, tenNhanVien);
+    while (true) {
+        getline(cin, tenNhanVien);
+        if (tenNhanVien.empty()) {
+            cout << "=> Ten nhan vien khong duoc de trong! Moi ban nhap lai: ";
+        } else {
+            break; // Exit the loop if the input is valid
+        }
+    }
+
     cout << "Nhap tuoi nhan vien: ";
     cin >> tuoi;
+    cin.ignore(); 
+
+    // Code kiem tra xem truong nhap gioTinh 
     cout << "Nhap gioi tinh nhan vien (Nam/Nu): ";
-    cin.ignore();
-    getline(cin, gioiTinh);
+    while (true) {
+        getline(cin, gioiTinh);
+        if (gioiTinh.empty()) {
+            cout << "=> Gioi tinh khong duoc de trong! Moi ban nhap lai: ";
+        } else if (gioiTinh == "Nam" || gioiTinh == "Nu") {
+            break; // Exit the loop if the input is valid
+        } else {
+            cout << "=> Gioi tinh phai la 'Nam' hoac 'Nu'! Moi nhap lai: ";
+        }
+    }
+
+    // Code kiem tra xem truong nhap diaChi
     cout << "Nhap dia chi nhan vien: ";
-    getline(cin, diaChi);
+    while (true) {
+        getline(cin, diaChi);
+        if (diaChi.empty()) {
+            cout << "=> Dia chi nhan vien khong duoc de trong! Moi ban nhap lai: ";
+        } else {
+            break; // Exit the loop if the input is valid
+        }
+    }
+
+    // Code kiem tra xem truong nhap soDienThoai
     cout << "Nhap so dien thoai nhan vien: ";
-    getline(cin, soDienThoai);
+    while (true) {
+        getline(cin, soDienThoai);
+        if (soDienThoai.empty()) {
+            cout << "=> So dien thoai khong duoc de trong! Moi ban nhap lai: ";
+        } else if (soDienThoai.length() != 10) {
+            cout << "=> So dien thoai phai co 10 chu so! Moi ban nhap lai: ";
+        } else if (soDienThoai.find_first_not_of("0123456789") != string::npos) {
+            cout << "=> So dien thoai chi duoc chua cac chu so! Moi ban nhap lai: ";
+        } else {
+            break; 
+        }
+    }
+
     cout << "Nhap luong nhan vien: ";
     cin >> luong;
+    cin.ignore(); 
 }
 
-// Ham hien thi thong tin nhan vien
+// Phuong thuc hien thi nhan vien
 void NhanVien::HienThiNhanVien() {
-    
     cout << "Ma nhan vien: " << maNhanVien << endl;
     cout << "Ten nhan vien: " << tenNhanVien << endl;
     cout << "Tuoi nhan vien: " << tuoi << endl;
@@ -103,25 +151,31 @@ void NhanVien::HienThiNhanVien() {
     cout << "Luong nhan vien: " << luong << endl;
 }
 
-// Ham cap nhap thong tin nhan vien
+// Phuong thuc cap nhap thong tin nhan vien
 void NhanVien::CapNhapThongTinNhanVien() {
     cout << "Nhap ten nhan vien moi: ";
-    cin.ignore();
+    cin.ignore(); 
     getline(cin, tenNhanVien);
+
     cout << "Nhap tuoi nhan vien moi: ";
     cin >> tuoi;
+    cin.ignore(); 
+
     cout << "Nhap gioi tinh nhan vien moi: ";
-    cin.ignore();
     getline(cin, gioiTinh);
+
     cout << "Nhap dia chi nhan vien moi: ";
     getline(cin, diaChi);
+
     cout << "Nhap so dien thoai nhan vien moi: ";
     getline(cin, soDienThoai);
+
     cout << "Nhap luong nhan vien moi: ";
-    cin >> luong;   
+    cin >> luong;
+    cin.ignore(); 
 }
 
-// Ham xoa nhan vien
+// Phuong thuc xoa nhan vien
 void NhanVien::XoaNhanVien() {
     maNhanVien = 0;
     tenNhanVien = "";
@@ -132,13 +186,14 @@ void NhanVien::XoaNhanVien() {
     luong = 0.0;
 }
 
-// Ham tim kiem nhan vien
+// Phuong thuc tim kiem nhan vien
 void NhanVien::TimNhanVien() {
-    cout << "Nhap ma nhan vien can tim kiem: " << endl;
+    cout << "Nhap ma nhan vien can tim kiem: ";
     int maTim;
     cin >> maTim;
+    cin.ignore(); 
 
-    if(maTim == maNhanVien) {
+    if (maTim == maNhanVien) {
         cout << "Thong tin nhan vien can tim: " << endl;
         HienThiNhanVien();
     } else {

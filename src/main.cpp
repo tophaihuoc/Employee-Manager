@@ -66,7 +66,7 @@ int main() {
                         cout << "Khong tim thay nhan vien co ma so " << maNV << endl;
                     }
                 }
-                break;
+                break; 
             }
             case 4: {
                 if (soLuongNhanVien == 0) {
