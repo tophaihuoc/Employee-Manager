@@ -1,17 +1,18 @@
-
 #include <iostream>
 #include "include/nhanvien.h"
 
 using namespace std;
 
 void menu() {
-    cout << "||========= Chuong trinh quan ly nhan vien cua cong ty ===========||" << endl;
+    cout << "||========= Chuong trinh quan ly luong nhan vien ===============||" << endl;
     cout << "|| 1. Them nhan vien                                              ||" << endl;
     cout << "|| 2. Hien thi danh sach                                          ||" << endl;
     cout << "|| 3. Cap nhat thong tin                                          ||" << endl;
     cout << "|| 4. Xoa nhan vien                                               ||" << endl;
     cout << "|| 5. Tim kiem nhan vien                                          ||" << endl;
-    cout << "|| 6. Thoat                                                       ||" << endl;
+    cout << "|| 6. Them luong nhan vien                                        ||" << endl;
+    cout << "|| 7. Tru luong nhan vien                                         ||" << endl;
+    cout << "|| 8. Thoat                                                       ||" << endl;
     cout << "||================================================================||" << endl;
 }
 
@@ -116,6 +117,56 @@ int main() {
                 break;
             }
             case 6: {
+                if (soLuongNhanVien == 0) {
+                    cout << "Danh sach nhan vien trong!" << endl;
+                } else {
+                    int maNV;
+                    double soTienThem;
+                    cout << "Nhap ma nhan vien can them luong: ";
+                    cin >> maNV;
+                    cout << "Nhap so tien can them: ";
+                    cin >> soTienThem;
+                    bool found = false;
+                    for (int i = 0; i < soLuongNhanVien; i++) {
+                        if (dsNhanVien[i].getMaNhanVien() == maNV) {
+                            dsNhanVien[i].ThemLuong(soTienThem);
+                            found = true;
+                            cout << "Da them luong cho nhan vien co ma so " << maNV << endl;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        cout << "Khong tim thay nhan vien co ma so " << maNV << endl;
+                    }
+                }
+                break;
+            }
+            case 7: {
+                if (soLuongNhanVien == 0) {
+                    cout << "Danh sach nhan vien trong!" << endl;
+                } else {
+                    int maNV;
+                    double soTienTru;
+                    cout << "Nhap ma nhan vien can tru luong: ";
+                    cin >> maNV;
+                    cout << "Nhap so tien can tru: ";
+                    cin >> soTienTru;
+                    bool found = false;
+                    for (int i = 0; i < soLuongNhanVien; i++) {
+                        if (dsNhanVien[i].getMaNhanVien() == maNV) {
+                            dsNhanVien[i].TruLuong(soTienTru);
+                            found = true;
+                            cout << "Da tru luong cho nhan vien co ma so " << maNV << endl;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        cout << "Khong tim thay nhan vien co ma so " << maNV << endl;
+                    }
+                }
+                break;
+            }
+            case 8: {
                 cout << "Ket thuc chuong trinh!" << endl;
                 break;
             }
@@ -123,7 +174,7 @@ int main() {
                 cout << "Lua chon khong hop le!" << endl;
                 break;
         }
-    } while (luaChon != 6);
+    } while (luaChon != 8);
 
     return 0;
 }
